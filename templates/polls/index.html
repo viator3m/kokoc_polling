@@ -3,5 +3,9 @@
 {% load static %}
 {% block title %}Главная страница{% endblock %}
 {% block content %}
-  main page of site
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for poll in polls %}
+      {% include 'polls/poll.html' %}
+    {% endfor %}
+  </div>
 {% endblock %}

@@ -24,6 +24,10 @@ class Poll(models.Model):
         verbose_name = 'Опрос'
         verbose_name_plural = 'Опросы'
 
+    @property
+    def first_question(self):
+        return Question.objects.filter(poll=self).order_by('id').first()
+
 
 class Question(models.Model):
     text = models.CharField(max_length=256, verbose_name='Текст вопроса')
@@ -37,12 +41,17 @@ class Question(models.Model):
         verbose_name = 'Вопрос'
         verbose_name_plural = 'Вопросы'
 
+    def __str__(self):
+        return self.text
+
     def get_answers_list(self):
         return [(answer.id, answer.text) for answer in (
             Answer.objects.filter(question=self))]
 
-    def __str__(self):
-        return self.text
+    @property
+    def next(self):
+        return Question.objects.filter(
+            id__gt=self.id, poll=self.poll).order_by('id').first()
 
 
 class Answer(models.Model):

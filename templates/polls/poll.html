@@ -1,0 +1,17 @@
+{% load thumbnail %}
+{% load static %}
+
+<div class="col">
+  <div class="card h-100">
+    {% thumbnail poll.image "960x540" crop="center" upscale=True as image %}
+      <img src="{{ image.url }}" class="card-img-top" alt="">
+    {% empty %}
+      <img src="{% static 'img/blank.png' %}" class="card-img-top" alt="">
+    {% endthumbnail %}
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title">{{ poll.title }}</h5>
+      <p class="card-text">{{ poll.description|truncatechars:256 }} </p>
+        <a href="{% url 'polls:polling' poll.id poll.first_question.id %}" class="btn btn-primary mt-auto">Пройти тест</a>
+    </div>
+  </div>
+</div>
