@@ -1,0 +1,33 @@
+  <div class="row my-3">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a
+          class="nav-link
+        {% if request.resolver_match.view_name == 'polls:index' %}
+          active{% endif %}"
+          href="{% url 'polls:index' %}"
+        >
+          Доступные тесты
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+           class="nav-link
+           {% if request.resolver_match.view_name == 'polls:solved' %}
+           active{% endif %}"
+           href="{% url 'polls:solved' %}"
+        >
+          Пройденные тесты
+        </a>
+      </li><li class="nav-item">
+        <a
+           class="nav-link
+           {% if request.resolver_match.view_name == 'users:users' %}
+           active{% endif %}"
+           href=""
+        >
+          Список пользователей
+        </a>
+      </li>
+    </ul>
+  </div>

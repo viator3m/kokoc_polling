@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 
 from polls.forms import AnswerForm
 from polls.models import Poll, UserPollResult, Question, Answer
@@ -63,3 +64,20 @@ def up_score(request, poll_id):
 
     result.save()
     return result
+
+
+def solved(request):
+    if request.user.is_authenticated:
+        polls = Poll.objects.filter(
+            id__in=(UserPollResult.objects.filter(
+                user=request.user).values('poll')))
+    else:
+        polls = None
+    context = {'polls': polls}
+    template = 'polls/solved.html'
+    return render(request, template, context)
+
+
+def clear(request, poll_id, question_id):
+    UserPollResult.objects.filter(poll=poll_id, user=request.user).delete()
+    return redirect(reverse('polls:polling', args=(poll_id, question_id)))

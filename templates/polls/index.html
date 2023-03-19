@@ -3,6 +3,11 @@
 {% load static %}
 {% block title %}Главная страница{% endblock %}
 {% block content %}
+  {% include 'includes/switcher.html' %}
+  {% if not polls %}
+    <p>Тестов пока больше нет. Можно улучшить результат в уже <a href="{% url 'polls:solved' %}">пройденных</a></p>
+  {% endif %}
+
   <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for poll in polls %}
       {% include 'polls/poll.html' %}
