@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models import Sum
 
+from polls.models import UserPollResult
 
 COLOR = (
     ('white', 'Белый'),
@@ -55,3 +57,23 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    @property
+    def solved(self):
+        return UserPollResult.objects.filter(user=self).count()
+
+    @property
+    def success_rate(self):
+        results = UserPollResult.objects.filter(user=self)
+        done = results.aggregate(Sum('done'))['done__sum']
+        correct = results.aggregate(Sum('correct'))['correct__sum']
+
+        done = 0 if not done else done
+        correct = 0 if not correct else correct
+
+        if not correct:
+            return 0
+
+        percent = (correct / done) * 100
+        return round(percent, 1)
+

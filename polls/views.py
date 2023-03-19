@@ -47,7 +47,7 @@ def finish(request, poll_id):
 
     }
     user = request.user
-    user.money += result.correct_answer
+    user.money += result.correct
     user.save()
     return render(request, template, context)
 
@@ -60,7 +60,7 @@ def up_score(request, poll_id):
     result.done += 1
 
     if Answer.objects.get(id=int(answer)).correct:
-        result.correct_answer += 1
+        result.correct += 1
 
     result.save()
     return result

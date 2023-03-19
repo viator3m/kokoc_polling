@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Список пользователей{% endblock %}
+{% block content %}
+  {% include "polls/../includes/switcher.html" %}
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Цвет профиля</th>
+      <th scope="col">Имя пользователя</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Пройдено тестов</th>
+      <th scope="col">Правильных ответов</th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for user in users %}
+    <tr>
+      <th scope="row"><div id="circle" style="background-color: {{ user.background_color }}"></div></th>
+      <td>{{ user.username }}</td>
+      <td>{{ user.first_name }}</td>
+      <td>{{ user.solved }}</td>
+      <td>{{ user.success_rate }}%</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

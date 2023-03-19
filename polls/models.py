@@ -87,7 +87,7 @@ class UserPollResult(models.Model):
         default=0,
         verbose_name='Всего ответов'
     )
-    correct_answer = models.IntegerField(
+    correct = models.IntegerField(
         default=0,
         verbose_name='Правильных ответов'
     )

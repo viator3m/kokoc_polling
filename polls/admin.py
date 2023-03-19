@@ -34,6 +34,6 @@ class PollAdmin(NestedModelAdmin):
 
 @admin.register(UserPollResult)
 class ResultAdmin(admin.ModelAdmin):
-    fields = ('user', 'poll', 'done', 'correct_answer')
-    list_display = ('user', 'poll', 'done', 'correct_answer')
+    fields = ('user', 'poll', 'done', 'correct')
+    list_display = ('user', 'poll', 'done', 'correct')
 

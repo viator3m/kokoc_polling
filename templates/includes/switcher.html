@@ -22,9 +22,9 @@
       </li><li class="nav-item">
         <a
            class="nav-link
-           {% if request.resolver_match.view_name == 'users:users' %}
+           {% if request.resolver_match.view_name == 'users:all' %}
            active{% endif %}"
-           href=""
+           href="{% url 'users:all' %}"
         >
           Список пользователей
         </a>
