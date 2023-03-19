@@ -10,7 +10,7 @@ from polls.models import Poll, Question, Answer, UserPollResult
 
 class AnswerInline(NestedTabularInline):
     model = Answer
-    fields = ('text', 'correct')
+    fields = ('text', 'correct_answer')
     extra = 0
     min_num = 1
     max_num = 4

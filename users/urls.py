@@ -7,6 +7,9 @@ app_name = 'users'
 
 urlpatterns = [
     path('all/', views.users_list, name='all'),
+    path('profile/', views.profile, name='profile'),
+    path('color/', views.color, name='color'),
+    path('style/', views.style, name='style'),
     path('signup/', views.SignUp.as_view(), name='signup'),
     path(
         'login/',

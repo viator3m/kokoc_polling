@@ -61,7 +61,8 @@ class Answer(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Вопрос'
     )
-    correct = models.BooleanField(verbose_name='Правильный')
+    correct_answer = models.BooleanField(verbose_name='Правильный',
+                                         default=False)
 
     class Meta:
         verbose_name = 'Ответ'

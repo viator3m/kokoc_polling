@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Выбрать цвет рамки профиля{% endblock %}
+{% block content %}
+  {% if not error %}
+    <form action="{% url 'users:color' %}" method="POST">
+      <input type="hidden" name="csrfmiddlewaretoken" value="">{% csrf_token %}
+
+
+      <div class="row text-center d-flex justify-content-center">
+        <div class="card" style="width: max-content; border: grey groove 1px; border-radius: 20px">
+          <p>Цвет рамки</p>
+          {% for color in form.color %}
+            <div style="padding-bottom: 10px">
+              <div class="card" style="background-color: {{ color.data.value }};">
+                <div class="card-header" >
+                  <label for={{ color.id_for_label }}>
+                    Пользователь: {{ user.username }}
+                  </label>
+                  <input type="radio"
+                         name="color"
+                         value="{{ color.data.value }}"
+                         id="{{ color.id_for_label }}"
+                  >
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class=" d-flex justify-content-center">
+        <input
+            class="btn-lg btn-primary"
+            type="submit"
+            value="Принять"
+            style="width: 150px; padding: 10px; margin-top: 10px" >
+      </div>
+    </form>
+
+  {% else %}
+    <div class="container row" style="height: 500px">
+      <div class="card text-center my-auto mx-auto border-danger" style="width: 18rem;">
+        <div class="card-body">
+          <p class="card-text">{{ error }}</p>
+          <a href="{% url 'polls:index' %}" class="btn btn-primary">На главную</a>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

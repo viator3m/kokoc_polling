@@ -59,7 +59,7 @@ def up_score(request, poll_id):
     )
     result.done += 1
 
-    if Answer.objects.get(id=int(answer)).correct:
+    if Answer.objects.get(id=int(answer)).correct_answer:
         result.correct += 1
 
     result.save()

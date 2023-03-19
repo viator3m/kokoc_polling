@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Мой профиль{% endblock %}
+{% block content %}
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Цвет профиля</th>
+      <th scope="col">Имя пользователя</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Пройдено тестов</th>
+      <th scope="col">Правильных ответов</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><div id="circle" style="background-color: {{ request.user.background_color }}"></div></th>
+      <td>{{ request.user.username }}</td>
+      <td>{{ request.user.first_name }}</td>
+      <td>{{ request.user.solved }}</td>
+      <td>{{ request.user.success_rate }}%</td>
+    </tr>
+  </tbody>
+</table>
+  <div class="d-flex justify-content-end">
+    <div class="card " style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Оформление</h5>
+        <p class="card-text">Вы можете сменить цвет рамки профиля или фона. Стоимость 5$</p>
+        <a href="{% url 'users:color' %}" class="card-link btn btn-primary">Цвет рамки</a>
+        <a href="{% url 'users:style' %}" class="card-link btn btn-primary">Цвет фона</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
