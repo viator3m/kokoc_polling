@@ -131,3 +131,6 @@ dmypy.json
 
 # charm files
 .idea/*
+
+# cache files
+*/cache/*
