@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py collectstatic --no-input
+echo 'Создание администратора'
+python manage.py create_admin
+echo 'Администратор создан'
+echo 'Загрузка дампа данных'
+python manage.py loaddata polls_db.json
+echo 'Дамп загружен'
+gunicorn kokoc_polling.wsgi:application --bind 0.0.0.0:8000
